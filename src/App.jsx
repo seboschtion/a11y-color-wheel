@@ -32,7 +32,7 @@ function hslToRgb(h, s, l, hex = false) {
 }
 
 const Color = (props) => {
-  const { h, s, l } = props;
+  const { h, s, l, step } = props;
   const style = { backgroundColor: `hsl(${h}, ${s}%, ${l}%)` };
   const contrastToBlack = contrast(hslToRgb(h, s, l), [0, 0, 0]);
   const contrastToWhite = contrast(hslToRgb(h, s, l), [255, 255, 255]);
@@ -44,7 +44,7 @@ const Color = (props) => {
     `${errorWhite ? " error-white " : ""}`;
   return (
     <div className={className} style={style}>
-      <p>color-{Math.round(l / 10) * 10}</p>
+      <p>color-{step}</p>
       <pre className="hex">{hslToRgb(h, s, l, true)}</pre>
       <pre className="contrast contrast-small contrast-black">
         {contrastToBlack}:1
@@ -58,13 +58,13 @@ const Color = (props) => {
 
 const Range = (props) => {
   const { label, value, onChange } = props;
-  const max = label === "H" ? 360 : label === "L" ? 9 : 100;
+  const max = label === "Hue" ? 360 : label === "Lightness" ? 9 : 100;
   return (
     <div className="range">
       <label htmlFor={label}>{label}</label>
       <input
         id={label}
-        type="text"
+        type="number"
         min="0"
         max={max}
         value={value}
@@ -86,16 +86,16 @@ const Selector = (props) => {
   return (
     <ul className="selector">
       <li>
-        <Range label="H" value={h} onChange={(v) => onChangeH(v)} />
+        <Range label="Hue" value={h} onChange={(v) => onChangeH(v)} />
       </li>
       <li>
-        <Range label="S" value={s} onChange={(v) => onChangeS(v)} />
+        <Range label="Saturation" value={s} onChange={(v) => onChangeS(v)} />
       </li>
       <li>
-        <Range label="L" value={l} onChange={(v) => onChangeL(v)} />
+        <Range label="Lightness" value={l} onChange={(v) => onChangeL(v)} />
       </li>
       <li>
-        <div>
+        <div class="helper">
           <p>
             Mit diesem speziellen Color Wheel kann man mit HSL verschiedene
             Farben auswählen. Das L wird automatisch abgestuft (10ner-Schritte),
@@ -124,7 +124,12 @@ const ColorStrip = (props) => {
     <ul className="colorstrip">
       {steps.map((step) => (
         <li key={step}>
-          <Color h={h} s={s} l={Math.min(step + parseInt(l), 100)} />
+          <Color
+            h={h}
+            s={s}
+            l={Math.min(step + parseInt(l), 100)}
+            step={step}
+          />
         </li>
       ))}
     </ul>

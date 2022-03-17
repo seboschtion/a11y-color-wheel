@@ -76,4 +76,13 @@
 
 .selector input[type="text"] {
   width: 40px;
+  border: none;
+}
+
+.helper {
+  column-count: 2;
+}
+
+.helper p {
+  margin-top: 0;
 }
