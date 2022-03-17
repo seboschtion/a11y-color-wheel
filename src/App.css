@@ -1,0 +1,79 @@
+.App {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.color {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.dark .color.error-black,
+.light .color.error-white {
+  border-bottom: 5px red solid;
+}
+
+.color pre,
+.color p {
+  margin-bottom: 0;
+}
+
+.light,
+.dark {
+  flex-grow: 2;
+  display: flex;
+  align-items: center;
+}
+
+.light {
+  background-color: white;
+}
+
+.dark {
+  background-color: black;
+}
+
+.contrast-small {
+  font-size: 14px;
+}
+
+.contrast-large {
+  font-size: 18px;
+}
+
+.contrast-white {
+  color: white;
+}
+
+.contrast-black {
+  color: black;
+}
+
+.colorstrip,
+.selector {
+  list-style: none;
+  padding: 0;
+  display: flex;
+}
+
+.colorstrip {
+  justify-items: stretch;
+  width: 100%;
+}
+
+.colorstrip li {
+  flex: 1 0 100px;
+}
+
+.color {
+  height: 200px;
+  width: 100%;
+}
+
+.selector input[type="text"] {
+  width: 40px;
+}
